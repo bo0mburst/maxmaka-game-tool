@@ -33,13 +33,23 @@ body {
 }
 
 #eligibles-box, #twitch-chat, #leaderboard-box {
-  height: 0;
   overflow-y: auto;
 }
 
-#twitch-chat {
-  height: 300px;
+#collapse-twitch,
+#collapse-eligibles,
+#leaderboard-box {
+  height: 0;
 }
+
+#collapse-eligibles {
+  min-height: 40%;
+}
+
+#eligibles-box {
+  min-height: 100px;
+}
+
 
 @media (min-width: 768px) {
   body {
@@ -56,6 +66,11 @@ body {
 }
 
 .list-group-item {
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid #555;
+}
+
+.accordion-button:not(.collapsed),
+.accordion-button.collapsed {
+  background-color: #515960;
 }
 
