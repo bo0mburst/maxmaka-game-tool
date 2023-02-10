@@ -1,0 +1,61 @@
+* {
+  text-shadow: none !important;
+  scrollbar-width: thin;  
+}
+
+body {
+  height: 100vh;
+}
+
+ /* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+#keyword-wrapper {
+  max-width: 400px;
+}
+
+#keyword {
+  font-size: 1.5em;
+}
+
+#timer {
+  max-width: 100%;
+  font-size: 3em;
+}
+
+#timer,
+#timer::-webkit-outer-spin-button,
+#timer::-webkit-inner-spin-button{
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+}
+
+#eligibles-box, #twitch-chat, #leaderboard-box {
+  height: 0;
+  overflow-y: auto;
+}
+
+#twitch-chat {
+  height: 300px;
+}
+
+@media (min-width: 768px) {
+  body {
+    overflow: hidden;
+  }
+  
+  #leaderboard {
+    max-width: 300px;
+    min-width: 300px;
+  }
+  #left-box {
+    width: 300px;
+  }
+}
+
+.list-group-item {
+  border-bottom: 1px solid #fff;
+}
+
