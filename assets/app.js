@@ -59,7 +59,7 @@ function initialLoad() {
 		}
 	}
 	twitchChatEmbed.setAttribute('src',
-		`https://www.twitch.tv/embed/${window.MAXMAKA.channel}/chat?parent=bo0mburst.github.io`)
+		`https://www.twitch.tv/embed/${window.MAXMAKA.channel}/chat?darkpopout&parent=bo0mburst.github.io`)
 	renderLeaderBoard();
 	renderEligibles();
 
