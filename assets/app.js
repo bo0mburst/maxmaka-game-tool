@@ -25,6 +25,8 @@ const channelBtn = document.getElementById('channel-btn');
 
 const searchName = document.getElementById('search-name');
 
+const copyLbEl = document.getElementById('copy-leaderboard');
+
 const winnerModal = new bootstrap.Modal(document.getElementById('winner-modal'), {
 	backdrop: 'static',
   keyboard: false
@@ -37,6 +39,7 @@ buttonEligibleWinner.addEventListener('click', pickEligibleWinner);
 buttonSave.addEventListener('click', saveToLeaderboard);
 channelBtn.addEventListener('click', updateChannel);
 searchName.addEventListener('input', filterLeaderboard);
+copyLbEl.addEventListener('click', copyLeaderboard);
 
 // load save state 
 initialLoad();
@@ -81,6 +84,22 @@ function saveState() {
 
 function getState() {
 	return JSON.parse(window.localStorage.getItem(STATE_KEY));
+}
+
+function copyLeaderboard () {
+	const lb  = window.MAXMAKA.leaderboard;
+	let value = [];
+	for(const name in lb) {
+		value.push(`${name}\t${lb[name]}`);
+	}
+
+	let copyText = value.join('\n');
+
+   // Copy the text inside the text field
+  navigator.clipboard.writeText(copyText);
+
+  // Alert the copied text
+  alert('Leaderboard copied!');
 }
 
 function filterLeaderboard() {

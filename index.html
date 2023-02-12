@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MAXMAKA tool</title>
   <link href="assets/bootstrap.min.css" rel="stylesheet">
-  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="../favicon.ico" type="image/x-icon">
   <link rel="stylesheet" href="assets/app.css">
 </head>
 <body>
@@ -79,11 +79,11 @@
 
     <div id="leaderboard" class="card h-100 rounded-0 d-flex flex-column border-dark">
       <div class="card-header p-0 flex-shrink-0 flex-grow-0">
-        <div class="p-3">
-          <strong class="text-info">
+        <div class="p-3 d-flex">
+          <strong class="text-info" id="copy-leaderboard">
             Leaderboard 
           </strong>
-          <span class="small float-end" role="button" id="clear-leaderboard">Clear</span>
+          <span class="small ms-auto" role="button" id="clear-leaderboard">Clear</span>
         </div>
         <div class="bg-dark">
           <input type="text" class="form-control form-control-sm bg-black" placeholder="Search name" id="search-name">
