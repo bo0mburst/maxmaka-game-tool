@@ -253,12 +253,12 @@ function logMessages (tags, message) {
 	const li = document.createElement('li');
 	const nameEl = document.createElement('span');
 	const messageEl = document.createElement('span');
-	nameEl.style.color = tags.color;
+	nameEl.classList.add('text-body');
 	nameEl.innerText = displayName;
-	messageEl.classList.add('text-muted');
+	messageEl.classList.add('text-white');
 	messageEl.innerText =  `: ${message}`;
 
-	li.classList.add('list-group-item', 'small', 'text-body');
+	li.classList.add('list-group-item', 'small');
 	li.append(nameEl);
 	li.append(messageEl);
 
