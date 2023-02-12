@@ -23,8 +23,12 @@
         </div>
       </div>
       <div id="collapse-twitch" class="collapse flex-fill show" aria-labelledby="heading-twitch">
-        <div class="list-group h-100 rounded-0 bg-black" id="twitch-chat">
-        </div>
+        <!-- <div class="list-group h-100 rounded-0 bg-black" id="twitch-chat">
+        </div> -->
+        <iframe id="twitch-chat-embed" src="https://www.twitch.tv/embed/spinterlandstv/chat?parent=bo0mburst.github.io"
+          height="100%"
+          width="100%">
+        </iframe>  
       </div>
 
       <!-- eligibles -->
@@ -96,14 +100,14 @@
 
   <div class="modal" id="winner-modal">
     <div class="modal-dialog" role="document">
-      <div class="modal-content">
+      <div class="modal-content bg-black">
         <div class="modal-body text-center">
           <div class="mb-2 text-end">
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
               <span aria-hidden="true"></span>
             </button>
           </div>
-          <img class="my-3" src="assets/loading-spinner.gif" alt="" width="200" height="200" id="loading-spinner">
+          <img class="mt-3 mb-5" src="assets/loading-spinner.gif" alt="" width="200" height="200" id="loading-spinner">
 
           <h3 id="winner-message" class="h3 d-none mb-5">🎉 Congratulations! 🎉</h3>
 

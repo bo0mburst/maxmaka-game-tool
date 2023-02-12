@@ -11,6 +11,7 @@ const keywordInput = document.getElementById('keyword');
 const keywordButton = document.getElementById('button-keyword');
 
 const twitchChat = document.getElementById('twitch-chat');
+const twitchChatEmbed = document.getElementById('twitch-chat-embed');
 const eligiblesBox = document.getElementById('eligibles-box');
 const leaderboardBox = document.getElementById('leaderboard-box');
 
@@ -57,7 +58,8 @@ function initialLoad() {
 			channel: state.channel || 'splinterlandstv',
 		}
 	}
-
+	twitchChatEmbed.setAttribute('src',
+		`https://www.twitch.tv/embed/${window.MAXMAKA.channel}/chat?parent=bo0mburst.github.io`)
 	renderLeaderBoard();
 	renderEligibles();
 
@@ -73,7 +75,7 @@ function initialLoad() {
 	});
 	client.connect().catch(console.error);
 	client.on('message', (channel, tags, message, self) => {
-		logMessages(tags, message);
+		// logMessages(tags, message);
 		logEligibles(tags, message);
 	});
 }
