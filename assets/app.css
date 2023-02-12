@@ -5,6 +5,7 @@
 
 body {
   height: 100vh;
+  background-image: none;
 }
 
  /* width */
@@ -25,9 +26,9 @@ body {
   font-size: 3em;
 }
 
-#timer,
-#timer::-webkit-outer-spin-button,
-#timer::-webkit-inner-spin-button{
+input[type=number],
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button{
   -webkit-appearance: none;
   -moz-appearance: textfield;
 }
@@ -57,16 +58,16 @@ body {
   }
   
   #leaderboard {
-    max-width: 300px;
     min-width: 300px;
   }
   #left-box {
-    width: 300px;
+    max-width: 350px;
   }
 }
 
 .list-group-item {
-  border-bottom: 1px solid #555;
+  border: 0;
+  background-color: transparent;
 }
 
 .accordion-button:not(.collapsed),
