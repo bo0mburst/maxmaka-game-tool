@@ -12,23 +12,26 @@
 <body>
   <div class="d-md-flex h-100">
     <div id="left-box" class="card flex-fill h-100 rounded-0 d-flex flex-column border-dark">
-      <!-- chat -->
+      <!-- leaderboard -->
       <div class="card-header p-3">
-        <div class="d-flex justify-content-between">
-          <strong class="text-warning" type="button"  data-bs-toggle="collapse" data-bs-target="#collapse-twitch" aria-expanded="false" aria-controls="collapse-twitch">
-            Chat log
+        <div class="d-flex">
+          <strong class="text-warning"  type="button"  data-bs-toggle="collapse" data-bs-target="#collapse-leaderboard" aria-expanded="false" aria-controls="collapse-leaderboard">
+            Leaderboard 
           </strong>
-          <span id="channel" class="small text-success"></span>
-          <button class="btn p-0" id="channel-btn">⚙️</button>
+
+          <span class="ms-2" role="button"  id="copy-leaderboard" data-bs-toggle="tooltip" data-bs-trigger="hover" title="Click to copy leaderboard">📜</span>
+          <span class="small ms-auto" role="button" id="clear-leaderboard">Clear</span>
         </div>
       </div>
-      <div id="collapse-twitch" class="collapse flex-fill show" aria-labelledby="heading-twitch">
-        <!-- <div class="list-group h-100 rounded-0 bg-black" id="twitch-chat">
-        </div> -->
-        <iframe id="twitch-chat-embed" src="https://www.twitch.tv/embed/splinterlandstv/chat?darkpopout&parent=bo0mburst.github.io"
-          height="100%"
-          width="100%">
-        </iframe>  
+
+      <div id="collapse-leaderboard" class="collapse flex-fill show" aria-labelledby="heading-twitch">
+        <div class="h-100 d-flex flex-column">
+          <div class="bg-dark">
+            <input type="text" class="form-control form-control-sm bg-dark" placeholder="Search name" id="search-name">
+          </div>
+          <div class="list-group rounded-0 flex-fill bg-black" id="leaderboard-box">
+          </div>
+        </div>
       </div>
 
       <!-- eligibles -->
@@ -82,18 +85,17 @@
     </div>
 
     <div id="leaderboard" class="card h-100 rounded-0 d-flex flex-column border-dark">
-      <div class="card-header p-0 flex-shrink-0 flex-grow-0">
-        <div class="p-3 d-flex">
-          <strong class="text-info" role="button" id="copy-leaderboard" data-bs-toggle="tooltip" data-bs-trigger="hover" title="Click to copy leaderboard">
-            Leaderboard 
-          </strong>
-          <span class="small ms-auto" role="button" id="clear-leaderboard">Clear</span>
-        </div>
-        <div class="bg-dark">
-          <input type="text" class="form-control form-control-sm bg-black" placeholder="Search name" id="search-name">
+      <div class="card-header flex-shrink-0 flex-grow-0">
+        <div class="d-flex">
+          <span id="channel" class="small text-success"></span>
+          <button class="btn ms-auto p-0" id="channel-btn">⚙️</button>
         </div>
       </div>
-      <div class="list-group rounded-0 flex-fill bg-dark" id="leaderboard-box">
+      <div class="flex-fill">
+        <iframe id="twitch-chat-embed" src="https://www.twitch.tv/embed/splinterlandstv/chat?darkpopout&parent=bo0mburst.github.io"
+          height="100%"
+          width="100%">
+        </iframe>
       </div>
     </div>
   </div>

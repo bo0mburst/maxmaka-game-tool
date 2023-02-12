@@ -92,8 +92,3 @@ input[type=number]::-webkit-inner-spin-button{
 .text-white {
   color: #ccc !important;
 }
-
-/* hide twitch leaderboard */
-[data-test-selector="channel-leaderboard-container"] {
-  display: none;
-}
