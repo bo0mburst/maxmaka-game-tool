@@ -23,7 +23,7 @@ body {
 
 #timer {
   max-width: 100%;
-  font-size: 3em;
+  font-size: 2em;
 }
 
 input[type=number],
@@ -51,6 +51,15 @@ input[type=number]::-webkit-inner-spin-button{
   min-height: 100px;
 }
 
+#center-content {
+  height: 150px;
+  width: 100%;
+  background-image: url('/assets/cthulhu.webp');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
 
 @media (min-width: 768px) {
   body {
@@ -62,6 +71,7 @@ input[type=number]::-webkit-inner-spin-button{
   }
   #left-box {
     max-width: 350px;
+    min-width: 350px;
   }
 }
 

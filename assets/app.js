@@ -209,7 +209,7 @@ function pickEligibleWinner () {
 		spinner.classList.add('d-none');
 		winnerElement.classList.remove('d-none');
 		winnerMessage.classList.remove('d-none');
-	}, 5000);
+	}, 3000);
 
 }
 
@@ -269,6 +269,11 @@ function logEligibles (tags, message) {
 
 function renderEligibles() {
 	const eligibles = [...window.MAXMAKA.eligibles] || [];
+	
+	if (!eligibles.length) {
+		clearEligiblesList();
+		return;
+	}
 
 	eligiblesBox.innerHTML = '';
 	
