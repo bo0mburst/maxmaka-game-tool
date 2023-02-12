@@ -248,29 +248,29 @@ function clearEligiblesList () {
 	window.MAXMAKA.eligibles = [];
 }
 
-function logMessages (tags, message) {
-	// twitch chat box
-	const displayName = tags['display-name'];
+// function logMessages (tags, message) {
+// 	// twitch chat box
+// 	const displayName = tags['display-name'];
 	
-	const li = document.createElement('li');
-	const nameEl = document.createElement('span');
-	const messageEl = document.createElement('span');
-	nameEl.classList.add('text-body');
-	nameEl.innerText = displayName;
-	messageEl.classList.add('text-white');
-	messageEl.innerText =  `: ${message}`;
+// 	const li = document.createElement('li');
+// 	const nameEl = document.createElement('span');
+// 	const messageEl = document.createElement('span');
+// 	nameEl.classList.add('text-body');
+// 	nameEl.innerText = displayName;
+// 	messageEl.classList.add('text-white');
+// 	messageEl.innerText =  `: ${message}`;
 
-	li.classList.add('list-group-item', 'small');
-	li.append(nameEl);
-	li.append(messageEl);
+// 	li.classList.add('list-group-item', 'small');
+// 	li.append(nameEl);
+// 	li.append(messageEl);
 
-	if (twitchChat.childNodes.length > 100) {
-		twitchChat.removeChild(twitchChat.getElementsByTagName('li')[0]);
-	}
+// 	if (twitchChat.childNodes.length > 100) {
+// 		twitchChat.removeChild(twitchChat.getElementsByTagName('li')[0]);
+// 	}
 
-	twitchChat.append(li);
-	twitchChat.scrollTop = twitchChat.scrollHeight;
-}
+// 	twitchChat.append(li);
+// 	twitchChat.scrollTop = twitchChat.scrollHeight;
+// }
 
 function logEligibles (tags, message) {
 	if(!window.MAXMAKA.isChatListenerActive) return;
