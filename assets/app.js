@@ -30,7 +30,7 @@ const winnerModal = new bootstrap.Modal(document.getElementById('winner-modal'),
   keyboard: false
 });
 
-clearEligibles.addEventListener('click', clearEligiblesList);
+clearEligibles.addEventListener('click', clearEligiblesListHandler);
 clearLeaderboard.addEventListener('click', clearLeaderboardList);
 keywordButton.addEventListener('click', toggleKeyWordVisibility);
 buttonEligibleWinner.addEventListener('click', pickEligibleWinner);
@@ -87,8 +87,6 @@ function filterLeaderboard() {
 	const filter = searchName.value.toLocaleLowerCase();
 	const items = leaderboardBox.querySelectorAll('li');
 
-	console.log(filter, items)
-	
 	items.forEach((item) => {
     let name = item.id;
     if (String(name.toLocaleLowerCase()).startsWith(filter)) {
@@ -101,14 +99,12 @@ function filterLeaderboard() {
 
 function updateChannel() {
 	const channel = prompt('Change channel', window.MAXMAKA.channel);
-	console.log(channel);
 	window.MAXMAKA = {
 		isChatListenerActive: false,
 		eligibles: [],
 		leaderboard: {},
 		channel: channel
 	};
-	console.log(window.MAXMAKA)
 	saveState()
 	location.reload(); 
 }
@@ -221,8 +217,12 @@ function toggleKeyWordVisibility() {
   }
 }
 
-function clearEligiblesList () {
+function clearEligiblesListHandler () {
 	if(!confirm('This will clear eligible list.')) return;
+	clearEligiblesList();
+}
+
+function clearEligiblesList () {
 	eligiblesBox.innerHTML = '<div class="text-muted text-center mt-3">List will show here</div>';
 	window.MAXMAKA.eligibles = [];
 }
