@@ -5,6 +5,7 @@
 
 body {
   height: 100vh;
+  padding: 20px;
   background-image: none;
 }
 
@@ -71,7 +72,7 @@ input[type=number]::-webkit-inner-spin-button{
 
 #preview-box {
   position: absolute;
-  width: calc(100vw - 300px);
+  width: calc(100% - 300px);
   right: 0;
   top: 0;
   bottom: 0;
@@ -138,10 +139,10 @@ input[type=number]::-webkit-inner-spin-button{
   }
   
   #left-box.hide {
-    left: -350px;
+    left: -370px;
   }
   #right-box.hide {
-    right: -300px;
+    right: -320px;
   }
 
   #controls.hide {

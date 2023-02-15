@@ -101,7 +101,7 @@ function getState() {
 	return JSON.parse(window.localStorage.getItem(STATE_KEY));
 }
 
-function toggleBattleMode() {
+function toggleBattleMode(e) {
 	document.getElementById('left-box').classList.toggle('hide');
 	document.getElementById('right-box').classList.toggle('hide');
 	document.getElementById('controls').classList.toggle('hide');
@@ -109,6 +109,8 @@ function toggleBattleMode() {
 	document.getElementById('preview-box-control').classList.toggle('d-none');
 	document.getElementById('button-eligible-winner').parentElement.classList.toggle('d-none');
 	document.getElementById('button-save').parentElement.classList.toggle('d-none');
+	if(e.target.innerText === 'Battle preview') e.target.innerText = 'Back';
+	else e.target.innerText = 'Battle preview';
 }
 
 function copyLeaderboard () {
