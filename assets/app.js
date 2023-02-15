@@ -3,6 +3,8 @@ window.MAXMAKA = {
 	eligibles: [],
 	leaderboard: {},
 	channel: 'splinterlandstv',
+	previews: [],
+	defaultTimer: 30,
 };
 
 const STATE_KEY =  'MAXMAKA';
@@ -17,6 +19,7 @@ const leaderboardBox = document.getElementById('leaderboard-box');
 
 const clearEligibles = document.getElementById('clear-eligibles');
 const clearLeaderboard = document.getElementById('clear-leaderboard');
+const buttonAddToLeaderboard = document.getElementById('add-to-leaderboard');
 
 const buttonEligibleWinner = document.getElementById('button-eligible-winner');
 const buttonSave = document.getElementById('button-save');
@@ -27,6 +30,8 @@ const channelBtn = document.getElementById('channel-btn');
 const searchName = document.getElementById('search-name');
 
 const copyLbEl = document.getElementById('copy-leaderboard');
+
+const buttonToggleBattleMode = document.getElementById('button-toggle-battle-mode');
 
 const winnerModal = new bootstrap.Modal(document.getElementById('winner-modal'), {
 	backdrop: 'static',
@@ -41,6 +46,8 @@ buttonSave.addEventListener('click', saveToLeaderboard);
 channelBtn.addEventListener('click', updateChannel);
 searchName.addEventListener('input', filterLeaderboard);
 copyLbEl.addEventListener('click', copyLeaderboard);
+buttonToggleBattleMode.addEventListener('click', toggleBattleMode);
+buttonAddToLeaderboard.addEventListener('click', addToLeaderboard);
 
 // load save state 
 initialLoad();
@@ -56,12 +63,18 @@ function initialLoad() {
 			eligibles: state.eligibles || [],
 			leaderboard: state.leaderboard || {},
 			channel: state.channel || 'splinterlandstv',
+			previews: state.previews || [],
+			defaultTimer: state.defaultTimer || 30,
 		}
 	}
 	twitchChatEmbed.setAttribute('src',
 		`https://www.twitch.tv/embed/${window.MAXMAKA.channel}/chat?darkpopout&parent=bo0mburst.github.io`)
 	renderLeaderBoard();
 	renderEligibles();
+
+	loadPreview();
+
+	stop();
 
 	const channel = window.MAXMAKA.channel;
 	channelEl.innerText = channel;
@@ -86,6 +99,16 @@ function saveState() {
 
 function getState() {
 	return JSON.parse(window.localStorage.getItem(STATE_KEY));
+}
+
+function toggleBattleMode() {
+	document.getElementById('left-box').classList.toggle('hide');
+	document.getElementById('right-box').classList.toggle('hide');
+	document.getElementById('controls').classList.toggle('hide');
+	document.getElementById('preview-box').classList.toggle('show');
+	document.getElementById('preview-box-control').classList.toggle('d-none');
+	document.getElementById('button-eligible-winner').parentElement.classList.toggle('d-none');
+	document.getElementById('button-save').parentElement.classList.toggle('d-none');
 }
 
 function copyLeaderboard () {
@@ -120,14 +143,26 @@ function filterLeaderboard() {
 
 function updateChannel() {
 	const channel = prompt('Change channel', window.MAXMAKA.channel);
-	window.MAXMAKA = {
-		isChatListenerActive: false,
-		eligibles: [],
-		leaderboard: {},
-		channel: channel
-	};
+	if (!channel || channel === window.MAXMAKA.channel) return;
+	window.MAXMAKA = Object.assign(window.MAXMAKA,
+		{
+			isChatListenerActive: false,
+			eligibles: [],
+			leaderboard: {},
+			channel: 'splinterlandstv',
+			previews: [],
+		}
+	);
 	saveState()
 	location.reload(); 
+}
+
+function addToLeaderboard() {
+	const username = prompt('Manually add name');
+	if(username) {
+		window.MAXMAKA.leaderboard[username] = window.MAXMAKA.leaderboard[username] || 0;
+		updateLeaderBoard();
+	}
 }
 
 function clearLeaderboardList () {
@@ -147,7 +182,7 @@ function saveToLeaderboard () {
 	const lb = window.MAXMAKA.leaderboard;
 	let points;
 	do{
-		points = prompt('Enter number of points to add. 0-100', 1);
+		points = prompt('Enter number of points to add. 0-100.\nThis will clear eligible list.\n', 1);
 	} while (isNaN(points));
 
 
@@ -157,6 +192,7 @@ function saveToLeaderboard () {
 	});
 
 	updateLeaderBoard();
+	clearEligiblesList();
 }
 
 function updateLeaderBoard() {
