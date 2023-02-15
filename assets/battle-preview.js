@@ -1,28 +1,36 @@
-const inputPreview = document.getElementById('preview-input');
+const btnAddPreview = document.getElementById('btn-add-preview');
 const listPreview = document.getElementById('preview-list');
 const btnRemovePreview = document.getElementById('remove-preview');
 
 btnRemovePreview.addEventListener('click', removePreview);
-inputPreview.addEventListener('change', addPreview);
+btnAddPreview.addEventListener('click', addPreview);
 
-function addPreview (e) {
-  if(!e.target.value) return;
+// function addPreview (e) {
+//   if(!e.target.value) return;
 
-  const files  = e.target.files;
-  if (FileReader && files && files.length) {
-    const reader = new FileReader();
+//   const files  = e.target.files;
+//   if (FileReader && files && files.length) {
+//     const reader = new FileReader();
     
-    const img = new Image();
+//     const img = new Image();
     
-    reader.onload = (event)=> {
-      img.src = event.target.result;
-      window.MAXMAKA.previews = [...window.MAXMAKA.previews, img.src];
-      saveState();
-      loadPreview();
-    };
+//     reader.onload = (event)=> {
+//       img.src = event.target.result;
+//       window.MAXMAKA.previews = [...window.MAXMAKA.previews, img.src];
+//       saveState();
+//       loadPreview();
+//     };
     
-    reader.readAsDataURL(files[0]);
-  }
+//     reader.readAsDataURL(files[0]);
+//   }
+// }
+
+function addPreview () {
+  const url = prompt('Enter image url\nexample:\n https://d36mxiodymuqjm.cloudfront.net/website/home/thumb_battle.png')
+  if (!url) return;
+  window.MAXMAKA.previews = [...window.MAXMAKA.previews, url];
+  saveState();
+  loadPreview();
 }
 
 function loadPreview () {
