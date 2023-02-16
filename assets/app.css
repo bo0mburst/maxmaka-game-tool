@@ -106,9 +106,9 @@ input[type=number]::-webkit-inner-spin-button{
 
 .preview-label {
   position: absolute;
-  left: 50%;
+  left: 20px;
   transform: translateX(-50%);
-  bottom: 0;
+  top: 0;
   font-size: 1.2em;
 }
 
