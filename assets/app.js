@@ -7,12 +7,14 @@ window.MAXMAKA = {
 	defaultTimer: 30,
 };
 
+const validEntries = /([BTbt][1-6][BTbt])/g
+
 const STATE_KEY =  'MAXMAKA';
 
 const keywordInput = document.getElementById('keyword');
 const keywordButton = document.getElementById('button-keyword');
 
-const twitchChat = document.getElementById('twitch-chat');
+const entriesLog = document.getElementById('entries-log');
 const twitchChatEmbed = document.getElementById('twitch-chat-embed');
 const eligiblesBox = document.getElementById('eligibles-box');
 const leaderboardBox = document.getElementById('leaderboard-box');
@@ -33,6 +35,8 @@ const copyLbEl = document.getElementById('copy-leaderboard');
 
 const buttonToggleBattleMode = document.getElementById('button-toggle-battle-mode');
 
+const buttonClearEntries = document.getElementById('btn-clear-entries');
+
 const winnerModal = new bootstrap.Modal(document.getElementById('winner-modal'), {
 	backdrop: 'static',
   keyboard: false
@@ -48,6 +52,7 @@ searchName.addEventListener('input', filterLeaderboard);
 copyLbEl.addEventListener('click', copyLeaderboard);
 buttonToggleBattleMode.addEventListener('click', toggleBattleMode);
 buttonAddToLeaderboard.addEventListener('click', addToLeaderboard);
+buttonClearEntries.addEventListener('click', clearEntries);
 
 // load save state 
 initialLoad();
@@ -88,8 +93,13 @@ function initialLoad() {
 	});
 	client.connect().catch(console.error);
 	client.on('message', (channel, tags, message, self) => {
-		// logMessages(tags, message);
-		logEligibles(tags, message);
+		if(!window.MAXMAKA.isChatListenerActive) return;
+		const msg = message.toLocaleLowerCase();
+		const key = String(keywordInput.value).toLocaleLowerCase();
+		
+
+		if (validEntries.test(message) || key && msg.includes(key)) logEntries(tags, message);
+		if (key && msg.includes(key)) logEligibles(tags, message);
 	});
 }
 
@@ -106,6 +116,7 @@ function toggleBattleMode(e) {
 	document.getElementById('right-box').classList.toggle('hide');
 	document.getElementById('controls').classList.toggle('hide');
 	document.getElementById('preview-box').classList.toggle('show');
+	document.getElementById('entries').classList.toggle('show');
 	document.getElementById('preview-box-control').classList.toggle('d-none');
 	document.getElementById('button-eligible-winner').parentElement.classList.toggle('d-none');
 	document.getElementById('button-save').parentElement.classList.toggle('d-none');
@@ -184,7 +195,7 @@ function saveToLeaderboard () {
 	const lb = window.MAXMAKA.leaderboard;
 	let points;
 	do{
-		points = prompt('Enter number of points to add. 0-100.\nThis will clear eligible list.\n', 1);
+		points = prompt('Enter number of points to add. 0-100.\nThis will also clear eligible and entries list.\n', 1);
 	} while (isNaN(points));
 
 
@@ -195,6 +206,7 @@ function saveToLeaderboard () {
 
 	updateLeaderBoard();
 	clearEligiblesList();
+	clearEntries();
 }
 
 function updateLeaderBoard() {
@@ -286,44 +298,38 @@ function clearEligiblesList () {
 	window.MAXMAKA.eligibles = [];
 }
 
-// function logMessages (tags, message) {
-// 	// twitch chat box
-// 	const displayName = tags['display-name'];
+function logEntries (tags, message) {
+	// twitch chat box
+	const displayName = tags['display-name'];
 	
-// 	const li = document.createElement('li');
-// 	const nameEl = document.createElement('span');
-// 	const messageEl = document.createElement('span');
-// 	nameEl.classList.add('text-body');
-// 	nameEl.innerText = displayName;
-// 	messageEl.classList.add('text-white');
-// 	messageEl.innerText =  `: ${message}`;
+	const li = document.createElement('li');
+	const nameEl = document.createElement('span');
+	const messageEl = document.createElement('span');
+	nameEl.classList.add('text-body');
+	nameEl.innerText = displayName;
+	messageEl.classList.add('text-white');
+	messageEl.innerText =  `: ${message}`;
 
-// 	li.classList.add('list-group-item', 'small');
-// 	li.append(nameEl);
-// 	li.append(messageEl);
+	li.classList.add('list-group-item', 'small');
+	li.append(nameEl);
+	li.append(messageEl);
 
-// 	if (twitchChat.childNodes.length > 100) {
-// 		twitchChat.removeChild(twitchChat.getElementsByTagName('li')[0]);
-// 	}
+	entriesLog.prepend(li);
+}
 
-// 	twitchChat.append(li);
-// 	twitchChat.scrollTop = twitchChat.scrollHeight;
-// }
+function clearEntries () {
+	entriesLog.innerHTML = '';
+}
 
 function logEligibles (tags, message) {
-	if(!window.MAXMAKA.isChatListenerActive) return;
-	const msg = message.toLocaleLowerCase();
-	const key = String(keywordInput.value).toLocaleLowerCase();
 	// eligibles
 	const eligibles = window.MAXMAKA?.eligibles || [];
-	if (key && msg.includes(key)) {
-		const displayName = tags['display-name'];
-		if (eligibles.includes(displayName)) return 
+	const displayName = tags['display-name'];
+	if (eligibles.includes(displayName)) return 
 
-		eligibles.push(displayName);
-		window.MAXMAKA.eligibles = eligibles;
-		renderEligibles();
-	}
+	eligibles.push(displayName);
+	window.MAXMAKA.eligibles = eligibles;
+	renderEligibles();
 }
 
 function renderEligibles() {

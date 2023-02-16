@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MAXMAKA Leaderboard</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link href="assets/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/app.css">
+</head>
+<body>
+  <!-- leaderboard -->
+  <div class="h-100 d-flex flex-column">
+    <div id="leaderboard" class="card-header bg-dark p-3">
+      <strong class="text-warning" >
+        Leaderboard 
+      </strong>
+    </div>
+
+    <div class="list-group rounded-0 flex-fill bg-black" id="leaderboard-box">
+    </div>
+  </div>
+
+  <script>
+    function renderLeaderBoard() {
+      window.MAXMAKA = JSON.parse(window.localStorage.getItem('MAXMAKA'));
+
+      const board = document.getElementById('leaderboard-box');
+      const lb = window?.MAXMAKA?.leaderboard || [];
+      board.innerHTML =  '';
+      
+      for (const user in lb) {
+        const li = document.createElement('li');
+        const nameEl = document.createElement('span');
+        nameEl.innerText = user;
+
+        const scoreEl = document.createElement('span');
+        scoreEl.classList.add('text-warning', 'ms-2', 'float-end', 'border-0', 'bg-transparent', 'text-end');
+        scoreEl.style.width = '50px';
+        scoreEl.innerText = lb[user];
+        li.classList.add('list-group-item', 'small', 'text-body');
+        li.setAttribute('id', user);
+        li.append(nameEl);
+        li.append(scoreEl);
+
+        board.append(li);
+      }
+
+      setTimeout(renderLeaderBoard, 5000);
+    }
+    renderLeaderBoard();
+  </script>
+</body>
+</html>

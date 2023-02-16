@@ -41,7 +41,7 @@ function loadPreview () {
   previews.forEach((i, index) => {
     const item = document.createElement('div');
     const label = document.createElement('span');
-    label.classList.add('preview-label');
+    label.classList.add('preview-label', 'bg-dark', 'text-primary', 'p-1');
     label.innerText = `${index + 1}/${previews.length}`;
     item.classList.add('carousel-item');
     if(index === 0) item.classList.add('active');

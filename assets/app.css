@@ -106,10 +106,25 @@ input[type=number]::-webkit-inner-spin-button{
 
 .preview-label {
   position: absolute;
-  left: 10px;
-  top: 0;
-  color: #fff;
-  font-size: 2em;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 0;
+  font-size: 1.2em;
+}
+
+#entries {
+  opacity: 0;
+  transform: translateY(30px);
+  pointer-events: none;
+  position: absolute;
+}
+
+#entries.show {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateY(0);
+  position: relative;
+  transition: all .3s ease;
 }
 
 @media (min-width: 768px) {
@@ -118,7 +133,7 @@ input[type=number]::-webkit-inner-spin-button{
   }
   
   #right-box {
-    min-width: 300px;
+    min-width: 350px;
     right: 0;
   }
   #left-box {
@@ -142,12 +157,14 @@ input[type=number]::-webkit-inner-spin-button{
     left: -370px;
   }
   #right-box.hide {
-    right: -320px;
+    right: -370px;
   }
 
   #controls.hide {
     left: 0;
-    max-width: 250px;
+    top: 50px;
+    bottom: 0;
+    max-width: 290px;
   }
 
   #preview-box.show {
@@ -173,4 +190,9 @@ input[type=number]::-webkit-inner-spin-button{
 
 .text-white {
   color: #ccc !important;
+}
+
+.material-symbols-outlined {
+  font-size: 1em;
+  vertical-align: middle;
 }
