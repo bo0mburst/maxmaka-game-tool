@@ -7,7 +7,9 @@ window.MAXMAKA = {
 	defaultTimer: 30,
 };
 
-const validEntries = /([BTbt][1-6][BTbt])/g
+let ENTRIES = [];
+
+const validEntries = /^([bt][1-6][bt])$/
 
 const STATE_KEY =  'MAXMAKA';
 
@@ -94,12 +96,13 @@ function initialLoad() {
 	client.connect().catch(console.error);
 	client.on('message', (channel, tags, message, self) => {
 		if(!window.MAXMAKA.isChatListenerActive) return;
-		const msg = message.toLocaleLowerCase();
-		const key = String(keywordInput.value).toLocaleLowerCase();
-		
-
-		if (validEntries.test(message) || key && msg === key) logEntries(tags, message);
-		if (key && msg === key) logEligibles(tags, message);
+		const msg = message.trim().toLowerCase();
+		const key = String(keywordInput.value).trim().toLowerCase();
+		const displayName = tags['display-name'];
+		const valid = validEntries.test(msg);
+		if (!key) return;
+		if(msg === key && !(valid && ENTRIES.includes(displayName))) logEligibles(tags, message);
+		if (valid || (key && message === key)) logEntries(tags, message);
 	});
 }
 
@@ -158,15 +161,14 @@ function filterLeaderboard() {
 function updateChannel() {
 	const channel = prompt('Change channel', window.MAXMAKA.channel);
 	if (!channel || channel === window.MAXMAKA.channel) return;
-	window.MAXMAKA = Object.assign(window.MAXMAKA,
-		{
-			isChatListenerActive: false,
-			eligibles: [],
-			leaderboard: {},
-			channel: channel,
-			previews: [],
-		}
-	);
+	window.MAXMAKA = {
+		isChatListenerActive: false,
+		eligibles: [],
+		leaderboard: {},
+		channel: channel,
+		previews: [],
+		defaultTimer: 30,
+	};
 	saveState()
 	location.reload(); 
 }
@@ -297,11 +299,14 @@ function clearEligiblesListHandler () {
 function clearEligiblesList () {
 	eligiblesBox.innerHTML = '<div class="text-muted text-center mt-3">List will show here</div>';
 	window.MAXMAKA.eligibles = [];
+	saveState();
 }
 
 function logEntries (tags, message) {
 	// twitch chat box
 	const displayName = tags['display-name'];
+
+	ENTRIES.push(displayName);
 	
 	const li = document.createElement('li');
 	const nameEl = document.createElement('span');
@@ -314,18 +319,19 @@ function logEntries (tags, message) {
 	li.classList.add('list-group-item', 'small');
 	li.append(nameEl);
 	li.append(messageEl);
-
 	entriesLog.prepend(li);
 }
 
 function clearEntries () {
 	entriesLog.innerHTML = '';
+	ENTRIES = [];
 }
 
 function logEligibles (tags, message) {
 	// eligibles
 	const eligibles = window.MAXMAKA?.eligibles || [];
 	const displayName = tags['display-name'];
+
 	if (eligibles.includes(displayName)) return 
 
 	eligibles.push(displayName);
