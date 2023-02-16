@@ -98,8 +98,8 @@ function initialLoad() {
 		const key = String(keywordInput.value).toLocaleLowerCase();
 		
 
-		if (validEntries.test(message) || key && msg.includes(key)) logEntries(tags, message);
-		if (key && msg.includes(key)) logEligibles(tags, message);
+		if (validEntries.test(message) || key && msg === key) logEntries(tags, message);
+		if (key && msg === key) logEligibles(tags, message);
 	});
 }
 
@@ -163,7 +163,7 @@ function updateChannel() {
 			isChatListenerActive: false,
 			eligibles: [],
 			leaderboard: {},
-			channel: 'splinterlandstv',
+			channel: channel,
 			previews: [],
 		}
 	);
