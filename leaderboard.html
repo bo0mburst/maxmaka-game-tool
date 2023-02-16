@@ -8,10 +8,27 @@
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link href="assets/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/app.css">
+  <style>
+    .leaderboard-wrapper {
+      width: 250px;
+    }
+
+    .leaderboard-empty-space {
+      background-image: url('../assets/cthulhu2.jpg'), url('assets/cthulhu2.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center
+    }
+
+    .list-group-item {
+      border-bottom: 1px solid #333;
+    }
+  </style>
 </head>
-<body>
+<body class="d-flex">
   <!-- leaderboard -->
-  <div class="h-100 d-flex flex-column">
+  <div class="leaderboard-empty-space flex-fill"></div>
+  <div class="h-100 flex-shrink-0 d-flex flex-column leaderboard-wrapper">
     <div id="leaderboard" class="card-header bg-dark p-3">
       <strong class="text-warning" >
         Leaderboard 
@@ -33,12 +50,13 @@
       for (const user in lb) {
         const li = document.createElement('li');
         const nameEl = document.createElement('span');
-        nameEl.innerText = user;
+        const name = String(user);
+        nameEl.innerText = name.substring(0, Math.min(name.length, 20));
 
         const scoreEl = document.createElement('span');
         scoreEl.classList.add('text-warning', 'ms-2', 'float-end', 'border-0', 'bg-transparent', 'text-end');
         scoreEl.style.width = '50px';
-        scoreEl.innerText = lb[user];
+        scoreEl.innerText = lb[user]
         li.classList.add('list-group-item', 'small', 'text-body');
         li.setAttribute('id', user);
         li.append(nameEl);
