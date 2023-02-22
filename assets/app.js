@@ -164,10 +164,10 @@ function updateChannel() {
 	window.MAXMAKA = {
 		isChatListenerActive: false,
 		eligibles: [],
-		leaderboard: {},
+		leaderboard: window.MAXMAKA.leaderboard,
 		channel: channel,
-		previews: [],
-		defaultTimer: 30,
+		previews: window.MAXMAKA.previews,
+		defaultTimer: window.MAXMAKA.defaultTimer,
 	};
 	saveState()
 	location.reload(); 
@@ -204,7 +204,7 @@ function saveToLeaderboard () {
 
 	eligibles.forEach(user => {
 		if (!lb[user]) lb[user] = 0;
-		lb[user] += Number(points);
+		lb[user] = Number(lb[user]) + Number(points);
 	});
 
 	updateLeaderBoard();
@@ -252,6 +252,13 @@ function renderLeaderBoard() {
 			lb[user] = e.target.value;
 			updateLeaderBoard();
 		});
+		scoreEl.addEventListener("keypress", function(event) {
+			// If the user presses the "Enter" key on the keyboard
+			if (event.key === "Enter") {
+				event.preventDefault();
+				event.target.blur();
+			}
+		}); 
 
 		li.classList.add('list-group-item', 'small', 'text-body');
 		li.setAttribute('id', user);

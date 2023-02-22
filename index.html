@@ -36,8 +36,11 @@
 
       <div id="collapse-leaderboard" class="collapse flex-fill show" aria-labelledby="heading-twitch">
         <div class="h-100 d-flex flex-column">
-          <div class="bg-dark">
-            <input type="text" class="form-control form-control-sm bg-dark" placeholder="Search name" id="search-name">
+          <div class="bg-dark d-flex align-items-center">
+            <span class="material-symbols-outlined position-absolute ms-1">
+              search
+            </span>
+            <input type="text" class="form-control form-control-sm bg-dark ps-4" placeholder="Type to search name" id="search-name">
           </div>
           <div class="list-group rounded-0 flex-fill bg-black" id="leaderboard-box">
           </div>
@@ -97,7 +100,19 @@
               </button>
             </div>
           </div>
-  
+
+          <div class="mt-5 text-center">
+            <button class="btn btn-secondary" id="button-toggle-battle-mode">
+              <span id="battle-preview">
+                <span class="material-symbols-outlined">swords</span>
+                Battle preview
+              </span>
+              <span id="back-to-dashboard" class="d-none">
+                <span class="material-symbols-outlined">arrow_back</span>
+                Back
+              </span>
+            </button>
+          </div>
           
           <div class="mt-4 text-center">
             <button class="btn btn-info" id="button-eligible-winner">
@@ -111,20 +126,6 @@
             <button class="btn btn-primary" id="button-save">
               <span class="material-symbols-outlined">social_leaderboard</span>
               Save to Leaderboard
-            </button>
-          </div>
-
-
-          <div class="mt-4 text-center">
-            <button class="btn btn-secondary" id="button-toggle-battle-mode">
-              <span id="battle-preview">
-                <span class="material-symbols-outlined">swords</span>
-                Battle preview
-              </span>
-              <span id="back-to-dashboard" class="d-none">
-                <span class="material-symbols-outlined">arrow_back</span>
-                Back
-              </span>
             </button>
           </div>
 
