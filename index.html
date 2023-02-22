@@ -141,19 +141,31 @@
 
         <div id="preview-box-control" class="position-absolute w-100 d-flex justify-content-between d-none">
           <div class="d-flex">
-            <button class="btn btn-sm btn-dark text-primary py-1 px-2 ms-5" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <button class="btn btn-sm btn-dark text-primary py-1 px-2 ms-3" data-bs-target="#preview-carousel" data-bs-slide="prev">
               <span  data-bs-toggle="tooltip" data-bs-trigger="hover" title="Previous preview">
                 <span class="material-symbols-outlined">arrow_back_ios</span>
               </span>
             </button>
-            <button class="btn btn-sm btn-dark text-primary py-1 px-2 ms-3" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <button class="btn btn-sm btn-dark text-primary py-1 px-2 ms-2" data-bs-target="#preview-carousel" data-bs-slide="next">
               <span  data-bs-toggle="tooltip" data-bs-trigger="hover" title="Next preview">
                 <span class="material-symbols-outlined">arrow_forward_ios</span>
               </span>
             </button>
-            <button class="btn btn-sm btn-dark text-primary py-1 px-2  ms-3" id="btn-add-preview">
+            <button class="btn btn-sm btn-dark text-primary py-1 px-2  ms-2" id="btn-add-preview">
               <span  data-bs-toggle="tooltip" data-bs-trigger="hover" title="Add new preview">
                 <span class="material-symbols-outlined">add</span> Add preview
+              </span>
+            </button>
+
+            <button class="btn btn-sm btn-dark text-primary py-1 px-2  ms-2" id="btn-load-answer">
+              <span  data-bs-toggle="tooltip" data-bs-trigger="hover" title="edit preview">
+                <span class="material-symbols-outlined">refresh</span>
+              </span>
+            </button>
+
+            <button class="btn btn-sm btn-dark text-primary py-1 px-2  ms-2" id="btn-edit-preview">
+              <span  data-bs-toggle="tooltip" data-bs-trigger="hover" title="load answer">
+                <span class="material-symbols-outlined">edit</span>
               </span>
             </button>
           </div>
@@ -166,7 +178,7 @@
         </div>
 
         <div id="preview-box" class="bg-dark bg-opacity-50">
-          <div id="carouselExampleControls" class="carousel slide w-100 h-100"  data-bs-interval="false">
+          <div id="preview-carousel" class="carousel slide w-100 h-100"  data-bs-interval="false">
             <div class="carousel-inner position-relative" id="preview-list">
             </div>
           </div>
@@ -207,6 +219,39 @@
           <h3 id="winner-message" class="h3 d-none mb-5">🎉 Congratulations! 🎉</h3>
 
           <h1 id="winner-name" class="text-center text-success mb-5"></h1>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="picture-modal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content bg-dark">
+        <div class="modal-body">
+          <div class="mb-2 text-end">
+            <button type="button" class="btn-close text-bg-primary" data-bs-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true"></span>
+            </button>
+          </div>
+          <div>Add preview</div>
+          <div class="mt-2">
+            <label for="" class="text-primary">Image link</label>
+            <input id="image-link" type="text" placeholder="https://" class="form-control">          
+          </div>
+          <div class="mt-2">
+            <label for="" class="text-primary">Answer</label>
+            <input id="image-name" type="text" placeholder="name" class="form-control">
+          </div>
+
+          <div class="mt-2">
+            <label for="" class="text-primary">Battle Link</label>
+            <input id="battle-link" type="text" placeholder="name" class="form-control">
+          </div>
+
+          <div class="text-end mt-2">
+            <button id="save-preview" class="btn btn-primary">Save</button>
+            <button id="update-preview" class="btn btn-primary">Update</button>
+          </div>
         </div>
       </div>
     </div>
