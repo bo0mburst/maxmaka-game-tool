@@ -130,7 +130,7 @@ function loadPreview () {
     img.src = i.url;
     
     link.setAttribute('href', i.battle); 
-    link.setAttribute('target', 'blank'); 
+    link.setAttribute('target', '_blank'); 
     link.classList.add('preview-battle-link', 'bg-dark', 'text-primary', 'p-1', 'small');
     link.innerText = 'View Battle';
 

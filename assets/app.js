@@ -39,6 +39,8 @@ const buttonToggleBattleMode = document.getElementById('button-toggle-battle-mod
 
 const buttonClearEntries = document.getElementById('btn-clear-entries');
 
+const buttonCopyWinner = document.getElementById('btn-copy-winner');
+
 const winnerModal = new bootstrap.Modal(document.getElementById('winner-modal'), {
 	backdrop: 'static',
   keyboard: false
@@ -55,6 +57,7 @@ copyLbEl.addEventListener('click', copyLeaderboard);
 buttonToggleBattleMode.addEventListener('click', toggleBattleMode);
 buttonAddToLeaderboard.addEventListener('click', addToLeaderboard);
 buttonClearEntries.addEventListener('click', clearEntries);
+buttonCopyWinner.addEventListener('click', copyWinner);
 
 // load save state 
 initialLoad();
@@ -271,12 +274,13 @@ function renderLeaderBoard() {
 
 function pickEligibleWinner () {
 	const eligibles = window.MAXMAKA.eligibles;
+	const winnerWrapperElement = document.getElementById('winner-wrapper');
 	const winnerElement = document.getElementById('winner-name');
 	const spinner = document.getElementById('loading-spinner');
 	const winnerMessage = document.getElementById('winner-message');
 
 	spinner.classList.remove('d-none');
-	winnerElement.classList.add('d-none');
+	winnerWrapperElement.classList.add('d-none');
 	winnerMessage.classList.add('d-none');
 	winnerModal.show();
 
@@ -284,7 +288,7 @@ function pickEligibleWinner () {
 		winner = eligibles[Math.floor(Math.random()*eligibles.length)];
 		winnerElement.innerText = winner;
 		spinner.classList.add('d-none');
-		winnerElement.classList.remove('d-none');
+		winnerWrapperElement.classList.remove('d-none');
 		winnerMessage.classList.remove('d-none');
 	}, 3000);
 
@@ -368,4 +372,9 @@ function renderEligibles() {
 	});
 
 	saveState();
+}
+
+function copyWinner () {
+	const winnerElement = document.getElementById('winner-name');
+	navigator.clipboard.writeText(winnerElement.innerText);
 }
