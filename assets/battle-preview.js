@@ -34,6 +34,7 @@ btnLoadAnswer.addEventListener('click', loadAnswer);
 previewCarousel.addEventListener('slide.bs.carousel', function (e) {
   const keyword = document.getElementById('keyword');
   keyword.value = window.MAXMAKA.previews[e.to]?.name || '';
+  keywordInput.type = "password";
 })
 
 

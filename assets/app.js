@@ -303,8 +303,9 @@ function toggleKeyWordVisibility() {
 }
 
 function clearEligiblesListHandler () {
-	if(!confirm('This will clear eligible list.')) return;
+	if(!confirm('This will clear eligible list. This will alswo clear entries')) return;
 	clearEligiblesList();
+	clearEntries();
 }
 
 function clearEligiblesList () {
