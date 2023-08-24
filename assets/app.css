@@ -202,3 +202,7 @@ input[type=number]::-webkit-inner-spin-button{
   font-size: 1em;
   vertical-align: middle;
 }
+
+.btn-primary:disabled {
+  background-color: #515960B3;
+}

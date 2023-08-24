@@ -213,6 +213,7 @@ function saveToLeaderboard () {
 	updateLeaderBoard();
 	clearEligiblesList();
 	clearEntries();
+	this.disabled = true;
 }
 
 function updateLeaderBoard() {
@@ -274,6 +275,9 @@ function renderLeaderBoard() {
 
 function pickEligibleWinner () {
 	const eligibles = window.MAXMAKA.eligibles;
+	
+	if(!eligibles || !eligibles.length) return alert('No eligible users');
+
 	const winnerWrapperElement = document.getElementById('winner-wrapper');
 	const winnerElement = document.getElementById('winner-name');
 	const spinner = document.getElementById('loading-spinner');
@@ -292,6 +296,7 @@ function pickEligibleWinner () {
 		winnerMessage.classList.remove('d-none');
 	}, 3000);
 
+	buttonSave.disabled = false;
 }
 
 function toggleKeyWordVisibility() {
@@ -306,6 +311,7 @@ function clearEligiblesListHandler () {
 	if(!confirm('This will clear eligible list. This will alswo clear entries')) return;
 	clearEligiblesList();
 	clearEntries();
+	buttonSave.disabled = true;
 }
 
 function clearEligiblesList () {

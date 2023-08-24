@@ -14,6 +14,11 @@ btnStop.addEventListener('click', stop);
 btnSetDefault.addEventListener('click', setDefault);
 
 function startTime(){
+  const eligibles = window.MAXMAKA.eligibles;
+	if ((eligibles && eligibles.length)) {
+    if (!confirm('WARNING! \nThe Eligible list or entries is not yet cleared. Proceed if you know what you\'re doing :)')) return;
+  };
+
   if (Number(timer.value) <= 0) timer.value = window.MAXMAKA.defaultTimer;
   time = Number(timer.value);
   
